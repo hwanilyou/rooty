@@ -9,6 +9,7 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/gateway-service/rooty.gateway-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/gateway-service/rooty.gateway-service.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/importBoard-service/rooty.importBoard-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/importBoard-service/rooty.importBoard-service.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/notification-service/rooty.notification-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/notification-service/rooty.notification-service.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/seat-service/rooty.seat-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/seat-service/rooty.seat-service.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/user-service/rooty.user-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/user-service/rooty.user-service.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/sb3_msa3.iml" filepath="$PROJECT_DIR$/.idea/sb3_msa3.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/auth-service/sb3_msa3.auth-service.iml" filepath="$PROJECT_DIR$/.idea/modules/auth-service/sb3_msa3.auth-service.iml" />

@@ -14,6 +14,7 @@
         <module name="rooty.booking-service.main" />
         <module name="rooty.gateway-service.main" />
         <module name="rooty.admin-service.main" />
+        <module name="rooty.seat-service.main" />
         <module name="rooty.notification-service.main" />
       </profile>
     </annotationProcessing>
