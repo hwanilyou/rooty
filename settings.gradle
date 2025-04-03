@@ -1,0 +1,10 @@
+rootProject.name = 'rooty'
+
+include 'gateway-service'
+include 'eureka-server'
+include 'importBoard-service'
+include 'user-service'
+include 'flight-service'
+include 'notification-service'
+include 'booking-service'
+include 'admin-service'

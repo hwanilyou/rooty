@@ -1,0 +1,53 @@
+<!-- register.html -->
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입</title>
+    <link rel="stylesheet" th:href="@{/css/auth.css}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="col-md-6">
+        <div class="card p-4">
+            <h2 class="text-center mb-4">회원가입</h2>
+
+            <form method="post" th:action="@{/register}" th:object="${user}">
+                <div class="mb-3">
+                    <label for="username" class="form-label">이름</label>
+                    <input type="text" class="form-control" id="username" th:field="*{username}" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="email" class="form-label">이메일</label>
+                    <input type="email" class="form-control" id="email" th:field="*{email}" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="password" class="form-label">비밀번호</label>
+                    <input type="password" class="form-control" id="password" th:field="*{password}" required>
+                </div>
+
+                <!-- 역할 필드는 관리자용 가입 경로에서만 표시되도록 분기 가능 -->
+                <div class="mb-3" th:if="${showAdminRole}">
+                    <label for="role" class="form-label">역할</label>
+                    <select class="form-select" id="role" th:field="*{role}">
+                        <option value="USER">일반 사용자</option>
+                        <option value="ADMIN">관리자</option>
+                    </select>
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-success">회원가입</button>
+                </div>
+            </form>
+
+            <div class="text-center mt-3">
+                <a th:href="@{/templates/login}">이미 계정이 있으신가요? 로그인</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

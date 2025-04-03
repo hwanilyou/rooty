@@ -1,0 +1,26 @@
+/* 네비게이션 바 스타일 */
+.navbar {
+    height: 60px;
+    padding: 5px 0;
+}
+.navbar-brand img {
+    height: 70px;
+    max-height: 100%;
+}
+.navbar-nav .nav-link {
+    font-size: 20px;
+    font-weight: bold;
+    color: #5156a1;
+    margin-left: 10px;
+}
+
+/* 푸터 */
+footer {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #343a40;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}

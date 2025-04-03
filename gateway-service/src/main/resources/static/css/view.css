@@ -1,0 +1,230 @@
+/* 상단 메뉴바 */
+.navbar {
+    background-color: #CBC0D3;
+    padding: 15px 30px;
+    margin-bottom: 50px;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--white);
+    text-decoration: none;
+}
+
+.navbar .nav-links {
+    list-style: none;
+    display: flex;
+}
+
+.navbar .nav-links li {
+    margin-left: 20px;
+}
+
+.navbar .nav-links a {
+    color: var(--white);
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.navbar .nav-links a:hover {
+    text-decoration: underline;
+}
+
+/* view.css */
+
+/* 색상 변수 */
+:root {
+    --primary-color: #d8a7ac;   /* 기본 핑크색 */
+    --secondary-color: #CBC0D3; /* 라벤더 */
+    --text-color: #333;
+    --bg-color: #f6f6f6;
+    --white: #fff;
+}
+
+/* 기본 리셋 및 바디 설정 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+/* 중앙 컨테이너 */
+.container {
+    width: 1100px;
+    margin: 0 auto;
+}
+
+/* 게시글 상자 스타일 */
+.post-container {
+    text-align: center;
+    height: 500px;
+    background-color: var(--white);
+    padding: 20px 30px;
+    margin: auto;
+    margin-bottom: 50px;
+    border: 1px solid var(--secondary-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 제목 영역 */
+.post-title {
+
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--secondary-color);
+}
+
+/* 메타 정보 (작성일, 조회수) */
+.post-meta {
+    font-size: 14px;
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+    text-align: center;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--secondary-color);
+}
+
+/* 게시글 내용 */
+.post-content {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--gray);
+    padding: inherit;
+    margin-bottom: 20px;
+}
+
+/* 수정/삭제 버튼 영역 (게시글 상자 내부, 우측 정렬) */
+.post-actions {
+    text-align: right;
+    margin-top: 20px;
+}
+.post-actions .btn {
+    padding: 8px 16px;
+    font-size: 14px;
+    text-transform: uppercase;
+    border-radius: 4px;
+    text-decoration: none;
+    margin-left: 10px;
+    transition: opacity 0.3s;
+    border: none;
+    cursor: pointer;
+}
+.post-actions .btn:hover {
+    opacity: 0.9;
+}
+.post-actions .btn.edit {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+.post-actions .btn.delete {
+    background-color: #555;
+    color: var(--white);
+}
+
+/* 댓글 목록 상자 */
+.comments-section {
+    text-align: center;
+    background-color: var(--white);
+    padding: 20px 30px;
+    margin: auto;
+    margin-bottom: 50px;
+    border: 1px solid var(--secondary-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.comments-section h3 {
+    font-size: 22px;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--secondary-color);
+    padding-bottom: 10px;
+}
+.comment {
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+.comment:last-child {
+    border-bottom: none;
+}
+.comment-author {
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-right: 10px;
+}
+.comment-date {
+    font-size: 12px;
+    color: var(--secondary-color);
+}
+.comment-content {
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+/* 댓글 작성 폼 */
+.comment-form {
+    text-align: center;
+    background-color: var(--white);
+    padding: 20px 30px;
+    margin: auto;
+    border: 1px solid var(--secondary-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.comment-form textarea {
+    width: 100%;
+    height: 80px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    resize: vertical;
+}
+.comment-form button {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+}
+.comment-form button:hover {
+    background-color: var(--secondary-color);
+}
+
+/* 페이징 영역 */
+.pagination {
+    text-align: center;
+    margin: 20px 0;
+}
+.pagination a {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 8px 12px;
+    margin: 0 5px;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+.pagination a:hover {
+    background-color: var(--secondary-color);
+}

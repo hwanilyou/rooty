@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<style>
+    .form-container {
+        width: 600px;
+        margin: 40px auto;
+        background-color: var(--white);
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .form-container h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: var(--gray);
+    }
+    .form-group {
+        margin-bottom: 20px;
+    }
+    .form-group label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 8px;
+        color: var(--gray);
+    }
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus {
+        border-color: var(--pink);
+        outline: none;
+    }
+    .btn-submit {
+        display: block;
+        width: 200px;
+        margin: 0 auto;
+        padding: 12px 0;
+        background-color: var(--pink);
+        color: #fff;
+        border: none;
+        border-radius: 20px;
+        font-size: 16px;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    .btn-submit:hover {
+        background-color: var(--lavender);
+    }
+</style>
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${importBoard.no != null} ? '공지사항 수정' : '공지사항 작성'">공지사항 작성</title>
+    <link rel="stylesheet" th:href="@{/css/list.css}">
+</head>
+<body>
+<!-- 상단 메뉴바 header안먹혀서 일단 강제로 먹히게 근데 왜 로ㄹ그인정보 안뜸ㅋㅋ-->
+<nav class="navbar">
+    <div class="container">
+        <a href="/main" class="logo">🌸 Bloom & Bouquet</a>
+        <ul class="nav-links">
+            <li><a href="/board/list">게시판</a></li>
+            <li><a href="/import_board/list">공지사항</a></li>
+            <!-- 로그인 상태에 따라 로그인/로그아웃 링크 노출 -->
+            <li th:if="${currentUser == null}"><a href="/user/first">로그인</a></li>
+            <li th:if="${currentUser != null}">
+                <span th:text="${currentUser.name} + '님 환영합니다.'"></span>
+                <a href="/user/logout">로그아웃</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<section class="notice">
+    <!-- 페이지 타이틀 영역-->
+    <div class="page-title">
+        <div class="container">
+            <h3 th:text="${importBoard.no != null} ? '공지사항 수정' : '공지사항 작성'">공지사항 작성</h3>
+        </div>
+    </div>
+
+    <!-- 작성 폼 영역 -->
+    <div id="board-form">
+        <div class="container"><!-- no가 존재시 수정으로  없으면 create로 넘어가서 글작성하게 -->
+            <form th:action="${importBoard.no != null} ? @{/import_board/update/{no}(no=${importBoard.no})} : @{/import_board/create}"
+                  method="post">
+                <!-- 제목 -->
+                <div class="form-group">
+                    <label for="title">제목</label>
+                    <input type="text" id="title" name="title" th:value="${importBoard.title}" placeholder="제목을 입력하세요" required>
+                </div>
+                <!-- 내용 -->
+                <div class="form-group">
+                    <label for="content">내용</label>
+                    <textarea id="content" name="content" rows="10" placeholder="내용을 입력하세요" required
+                              th:text="${importBoard.content}"></textarea>
+                </div>
+                <!-- 작성/수정 버튼 -->
+                <div style="text-align: right; margin-top: 20px;">
+                    <button type="submit" class="btn-submit"
+                            th:text="${importBoard.no != null} ? '수정하기' : '작성하기'">작성하기</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+</body>
+</html>
+

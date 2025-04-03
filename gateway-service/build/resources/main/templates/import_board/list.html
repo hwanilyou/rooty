@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>공지사항</title>
+    <link rel="stylesheet" th:href="@{/css/list.css}">
+</head>
+<body>
+<!-- 공통 메뉴바 프래그먼트 포함 -->
+<div th:replace="fragments/header :: header"></div>
+
+<section class="notice">
+    <div class="page-title">
+        <div class="container">
+            <h3>공지사항</h3>
+        </div>
+    </div>
+
+    <!-- 검색 영역 -->
+    <div id="board-search">
+        <div class="container">
+            <div class="search-window">
+                <form th:action="@{/import_board/search}" method="get">
+                    <div class="search-wrap">
+                        <label for="search" class="blind">공지사항 내용 검색</label>
+                        <input id="search" type="search" name="keyword" placeholder="검색어를 입력해주세요." value="">
+                        <button type="submit" class="btn btn-pink">검색</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- 게시글이 없을 경우 메시지 출력 -->
+    <!-- 변경: importBoards가 null인 경우에도 안전하게 처리 -->
+    <div th:if="${importBoards == null or importBoards.isEmpty()}">
+        <p>게시글이 없습니다.</p>
+    </div>
+
+    <!-- 공지사항 목록 영역 -->
+    <div id="board-list">
+        <div class="container">
+            <table class="board-table">
+                <thead>
+                <tr>
+                    <th scope="col" class="th-num">번호</th>
+                    <th scope="col" class="th-title">제목</th>
+                    <th scope="col" class="th-date">등록일</th>
+                    <th scope="col" class="th-view">조회수</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- 번호 no값이 아니라 그냥 1씩 늘어나게 -->
+                <tr th:each="import_board, stat : ${importBoards}">
+                    <td th:text="${stat.size - stat.index}">번호</td>
+                    <td>
+                        <a th:href="@{/import_board/view/{no}(no=${import_board.no})}" th:text="${import_board.title}">제목</a>
+                    </td>
+                    <td th:text="${#temporals.format(import_board.createdAt, 'yyyy-MM-dd HH:mm')}">작성일</td>
+                    <td th:text="${import_board.views}">조회수</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 관리자 전용 글쓰기 버튼 -->
+    <div class="container_root"
+         th:if="${currentUser != null and currentUser.role == 'ADMIN'}"
+         style="margin-top: 20px; text-align: right;">
+        <!-- 변경: 글쓰기 버튼을 GET 방식으로 /import_board/new로 이동 -->
+        <form class ="board_form"th:action="@{/import_board/new}" method="get">
+            <button type="submit" class="btn board_btn">글쓰기</button>
+        </form>
+    </div>
+
+    <!-- Pagination -->
+    <!-- 변경: currentPage와 totalPages가 null이 아닌 경우에만 페이징 영역 표시 -->
+    <div class="container" style="margin-top: 20px; text-align: center;"
+         th:if="${currentPage != null and totalPages != null}">
+        <div class="pagination">
+            <!-- 이전 페이지 링크: currentPage가 0보다 클 때만 표시 -->
+            <a th:if="${currentPage > 0}"
+               th:href="@{/import_board/list(page=${currentPage - 1})}" class="btn">이전</a>
+            <span>페이지 <span th:text="${currentPage + 1}"></span> / <span th:text="${totalPages}"></span></span>
+            <!-- 다음 페이지 링크: currentPage가 totalPages - 1보다 작을 때만 표시 -->
+            <a th:if="${currentPage < totalPages - 1}"
+               th:href="@{/import_board/list(page=${currentPage + 1})}" class="btn">다음</a>
+        </div>
+    </div>
+</section>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>
