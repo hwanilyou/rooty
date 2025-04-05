@@ -5,9 +5,10 @@
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light py-0 fixed-top">
         <div class="container">
-            <a class="navbar-brand" th:href="@{/}">
+            <a class="navbar-brand" href="/">
                 <img th:src="@{/images/Rooty_logo.png}" alt="로고" width="100">
             </a>
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -15,8 +16,29 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" th:href="@{/list}">공지사항</a></li>
                     <li class="nav-item"><a class="nav-link" th:href="@{/reservation}">예약</a></li>
-                    <li class="nav-item"><a class="nav-link" th:href="@{/aircraft}">항공기 정보</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../flight/admin-flight-list.html">
+                            <i class="bi bi-airplane"></i>항공편 관리
+                        </a>
+                    </li>
                     <li class="nav-item"><a class="nav-link" th:href="@{/login}">로그인</a></li>
+                </ul>
+                <ul class="navbar-nav" id="authNav">
+                    <!-- 로그인 전 -->
+                    <li class="nav-item" id="loginNav">
+                        <a class="nav-link" href="/login">
+                            <i class="bi bi-box-arrow-in-right"></i>로그인
+                        </a>
+                    </li>
+                    <!-- 로그인 후 -->
+                    <li class="nav-item d-none" id="userNav">
+                        <span class="nav-link" id="username"></span>
+                    </li>
+                    <li class="nav-item d-none" id="logoutNav">
+                        <a class="nav-link" href="#" id="logoutBtn">
+                            <i class="bi bi-box-arrow-right"></i>로그아웃
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>

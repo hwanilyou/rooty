@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>예약 관리 - 예약 목록</title>
+    <link rel="stylesheet" href="/css/flight_style.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <script src="/js/common.js"></script>
+</head>
+<body>
+<header>
+    <div class="container">
+        <h1 class="logo"><a href="../index.html">항공 예약 서비스</a></h1>
+        <nav>
+            <ul>
+                <li><a href="../index.html">HOME</a></li>
+                <li><a href="../flight/admin-flight-list.html">항공편 관리</a></li>
+                <li><a href="../admin.html">회원 관리</a></li>
+                <li><a href="../reservation/admin-reservation-list.html" class="active">예약 관리</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <div class="container">
+        <h2>예약 목록</h2>
+        <table class="data-table">
+            <thead>
+            <tr>
+                <th>예약 ID</th>
+                <th>사용자</th>
+                <th>항공편</th>
+                <th>출발 시간</th>
+                <th>출발 위치</th>
+                <th>도착 위치</th>
+                <th>상세/관리</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- 예시 데이터, 실제 서비스에서는 서버에서 데이터를 동적으로 채워야 합니다. -->
+            <tr>
+                <td>101</td>
+                <td>홍길동</td>
+                <td>대한항공 2025-04-05</td>
+                <td>2025-04-05 08:00</td>
+                <td>ICN</td>
+                <td>GMP</td>
+                <td>
+                    <a href="../reservation/admin-reservation-edit.html?id=101" class="btn small">수정/삭제</a>
+                </td>
+            </tr>
+            <!-- 추가 예약 데이터 ... -->
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2025 항공 예약 서비스. All rights reserved.</p>
+    </div>
+</footer>
+</body>
+</html>

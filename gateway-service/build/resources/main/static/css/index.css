@@ -1,12 +1,13 @@
 /* 네비게이션 바 스타일 */
 .navbar {
-    height: 60px;
+    height: 70px;  /* 이미지 높이와 일치시킴 */
     padding: 5px 0;
 }
 .navbar-brand img {
-    height: 70px;
+    height: 100%;  /* navbar의 높이에 맞춤 */
     max-height: 100%;
 }
+
 .navbar-nav .nav-link {
     font-size: 20px;
     font-weight: bold;
