@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>항공 예약 관리자 - 항공편 수정</title>
+  <link rel="stylesheet" href="/css/flight_style.css">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+<header>…</header>
+<main>
+  <div class="container">
+    <h2>항공편 수정</h2>
+    <form id="flightEditForm" class="form-horizontal">
+      <input type="hidden" id="id" />
+
+      <div class="form-group">
+        <label for="airline">항공사</label>
+        <input type="text" id="airline" required />
+      </div>
+      <div class="form-group">
+        <label for="departureTime">출발 시간</label>
+        <input type="datetime-local" id="departureTime" required />
+      </div>
+      <div class="form-group">
+        <label for="arrivalTime">도착 시간</label>
+        <input type="datetime-local" id="arrivalTime" readonly />
+      </div>
+      <div class="form-group">
+        <label for="departureLoc">출발 위치</label>
+        <select id="departureLoc" required>
+          <option value="">-- 선택하세요 --</option>
+          <option value="GMP">GMP (김포)</option>
+          <option value="CJU">CJU (제주)</option>
+          <option value="PUS">PUS (부산)</option>
+          <option value="TAE">TAE (대구)</option>
+          <option value="KWJ">KWJ (광주)</option>
+          <option value="RSU">RSU (군산)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="arrivalLoc">도착 위치</label>
+        <select id="arrivalLoc" required>
+          <option value="">-- 선택하세요 --</option>
+          <option value="GMP">GMP (김포)</option>
+          <option value="CJU">CJU (제주)</option>
+          <option value="PUS">PUS (부산)</option>
+          <option value="TAE">TAE (대구)</option>
+          <option value="KWJ">KWJ (광주)</option>
+          <option value="RSU">RSU (군산)</option>
+        </select>
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn">수정 완료</button>
+        <a href="/flight/admin-list" class="btn secondary">목록으로 돌아가기</a>
+      </div>
+    </form>
+  </div>
+</main>
+<footer>…</footer>
+
+<script src="/js/common.js"></script>
+<script src="/js/flight-edit.js"></script>
+</body>
+</html>

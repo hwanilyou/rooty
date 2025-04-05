@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>항공 예약 관리자 - 항공편 등록</title>
+    <link rel="stylesheet" href="/css/flight_style.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <script src="/js/common.js"></script>
+</head>
+<body>
+<header>
+    <div class="container">
+        <h1 class="logo"><a href="/">항공 예약 서비스</a></h1>
+        <nav>
+            <ul>
+                <li><a href="/">HOME</a></li>
+                <li><a href="/flight/admin-list">항공편 관리</a></li>
+                <li><a href="/admin">회원 관리</a></li>
+                <li><a href="/reservation/admin-reservation-list">예약 관리</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<main>
+    <div class="container">
+        <h2>신규 항공편 등록</h2>
+        <!-- 백엔드 REST API 호출: POST /api/flights -->
+        <form id="flightRegisterForm" action="/api/flights/" method="post" class="form-horizontal">
+            <div class="form-group">
+                <label for="airline">항공사</label>
+                <input type="text" id="airline" name="airline" placeholder="예: 대한항공" required>
+            </div>
+            <div class="form-group">
+                <label for="departureTime">출발 시간</label>
+                <input type="datetime-local" id="departureTime" name="departureTime" required>
+            </div>
+            <div class="form-group">
+                <label for="arrivalTime">도착 시간 (자동 계산됨)</label>
+                <!-- 도착 시간은 출발 시간 기준 +1시간 -->
+                <input type="datetime-local" id="arrivalTime" name="arrivalTime" readonly>
+            </div>
+            <div class="form-group">
+                <label for="departureLoc">출발 위치</label>
+                <select id="departureLoc" name="departureLoc" required>
+                    <option value="">-- 선택하세요 --</option>
+                    <option value="GMP">GMP (김포)</option>
+                    <option value="CJU">CJU (제주)</option>
+                    <option value="PUS">PUS (부산)</option>
+                    <option value="TAE">TAE (대구)</option>
+                    <option value="KWJ">KWJ (광주)</option>
+                    <option value="RSU">RSU (군산)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="arrivalLoc">도착 위치</label>
+                <select id="arrivalLoc" name="arrivalLoc" required>
+                    <option value="">-- 선택하세요 --</option>
+                    <option value="GMP">GMP (김포)</option>
+                    <option value="CJU">CJU (제주)</option>
+                    <option value="PUS">PUS (부산)</option>
+                    <option value="TAE">TAE (대구)</option>
+                    <option value="KWJ">KWJ (광주)</option>
+                    <option value="RSU">RSU (군산)</option>
+                </select>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn">등록</button>
+                <a href="/flight/admin-list" class="btn secondary">목록으로 돌아가기</a>
+            </div>
+        </form>
+    </div>
+</main>
+<footer>
+    <div class="container">
+        <p>&copy; 2025 항공 예약 서비스. All rights reserved.</p>
+    </div>
+</footer>
+<script src="/js/flight-register.js"></script>
+</body>
+</html>
