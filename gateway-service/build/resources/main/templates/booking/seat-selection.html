@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="UTF-8">
+    <title>좌석 선택</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/flight_style.css">
+    <link rel="stylesheet" href="/css/seat-selection.css">
+    <!--    <link rel="stylesheet" href="/css/admin.css">-->
+    <!--    <link rel="stylesheet" href="/css/fragments.css">-->
+    <!--    <link rel="stylesheet" href="/css/style.css">-->
+    <script src="/js/common.js"></script>
+    <script src="/js/userinfo.js"></script>
+
+</head>
+<body>
+<div layout:include="fragments/header :: headerFragment"></div>
+<h1>좌석 선택</h1>
+<div class="airplane">
+    <!-- 좌석 구분선 -->
+    <div class="section-divider" style="top: 170px;">퍼스트 클래스</div>
+    <div class="section-divider" style="top: 350px;">비즈니스 클래스</div>
+    <div class="section-divider" style="top: 620px;">이코노미 클래스</div>
+
+    <!-- 좌석들 -->
+    <div class="seat-row" style="top: 60px;">
+        <div class="seat available" data-seat="A1">A1</div>
+        <div class="seat available" data-seat="B1">B1</div>
+        <div class="seat available" data-seat="C1">C1</div>
+    </div>
+    <div class="seat-row" style="top: 105px;">
+        <div class="seat available" data-seat="A2">A2</div>
+        <div class="seat available" data-seat="B2">B2</div>
+        <div class="seat available" data-seat="C2">C2</div>
+    </div>
+    <!-- 추가 좌석 배치 -->
+    <div class="seat-row" style="top: 190px;">
+        <div class="seat available" data-seat="A3">A3</div>
+        <div class="seat available" data-seat="B3">B3</div>
+        <div class="seat available" data-seat="C3">C3</div>
+    </div>
+    <div class="seat-row" style="top: 235px;">
+        <div class="seat available" data-seat="A4">A4</div>
+        <div class="seat available" data-seat="B4">B4</div>
+        <div class="seat available" data-seat="C4">C4</div>
+    </div>
+    <div class="seat-row" style="top: 280px;">
+        <div class="seat available" data-seat="A5">A5</div>
+        <div class="seat available" data-seat="B5">B5</div>
+        <div class="seat available" data-seat="C5">C5</div>
+    </div>
+    <div class="seat-row" style="top: 370px;">
+        <div class="seat available" data-seat="A6">A6</div>
+        <div class="seat available" data-seat="B6">B6</div>
+        <div class="seat available" data-seat="C6">C6</div>
+    </div>
+    <div class="seat-row" style="top: 415px;">
+        <div class="seat available" data-seat="A7">A7</div>
+        <div class="seat available" data-seat="B7">B7</div>
+        <div class="seat available" data-seat="C7">C7</div>
+    </div>
+    <div class="seat-row" style="top: 460px;">
+        <div class="seat available" data-seat="A8">A8</div>
+        <div class="seat available" data-seat="B8">B8</div>
+        <div class="seat available" data-seat="C8">C8</div>
+    </div>
+    <div class="seat-row" style="top: 505px;">
+        <div class="seat available" data-seat="A9">A9</div>
+        <div class="seat available" data-seat="B9">B9</div>
+        <div class="seat available" data-seat="C9">C9</div>
+    </div>
+    <div class="seat-row" style="top: 550px;">
+        <div class="seat available" data-seat="A10">A10</div>
+        <div class="seat available" data-seat="B10">B10</div>
+        <div class="seat available" data-seat="C10">C10</div>
+    </div>
+
+    <!-- 더 추가 가능 -->
+</div>
+
+<div class="button-container">
+    <button onclick="confirmBooking()">예약 완료</button>
+</div>
+
+<script src="/js/seat-selection.js"></script>
+</body>
+</html>

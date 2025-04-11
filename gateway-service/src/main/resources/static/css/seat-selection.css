@@ -1,0 +1,83 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+h1 {
+    margin: 20px 0;
+}
+
+.airplane {
+    position: relative;
+    width: 1600px;
+    height: 800px;
+    margin: 0 auto;
+    background: url('../images/airplane22.png') no-repeat center;
+    /*background-size: contain;*/
+    background-size: 100%;
+    background-position: calc(50% - 20px) 30%;
+}
+
+.seat-row {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.seat {
+
+    width: 40px;
+    height: 40px;
+    margin: 5px;
+    border-radius: 5px;
+    line-height: 40px;
+    background-color: #4CAF50; /* 기본 초록: 예약 가능 */
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.seat.reserved {
+    background-color: #777; /* 회색: 예약 완료 */
+    cursor: not-allowed;
+}
+
+.seat.selected {
+    background-color: #FFD700; /* 노랑: 선택됨 */
+}
+
+.section-divider {
+    position: absolute;
+    width: 100%;
+    border-top: 2px dashed #333;
+    text-align: left;
+    padding-left: 10px;
+    font-weight: bold;
+    color: #333;
+    font-size: 14px;
+}
+
+.button-container {
+    margin-top: 20px;
+}
+
+button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}

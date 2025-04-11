@@ -1,0 +1,87 @@
+body {
+    background-color: #f8f9fa;
+}
+
+/* ===== 마이페이지 래퍼 ===== */
+.mypage-container {
+    max-width: 500px;
+    background-color: white;
+    margin: 50px auto;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* ===== 제목 ===== */
+.mypage-title {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-bottom: 1em;
+    color: #333;
+}
+
+/* ===== 라벨 & 인풋 ===== */
+.mypage-label {
+    font-weight: bold;
+    margin-top: 1.2em;
+    display: block;
+    color: #444;
+}
+
+.mypage-input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 0.4em;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box;
+    transition: border 0.2s ease-in-out;
+}
+
+.mypage-input:focus {
+    border-color: #3b82f6;
+    outline: none;
+}
+
+/* ===== 버튼 ===== */
+.mypage-button {
+    margin-top: 2em;
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.mypage-button:hover {
+    background-color: #2563eb;
+}
+
+.mypage-delete-btn {
+    background-color: #ef4444;
+    margin-top: 1em;
+}
+
+.mypage-button:hover.mypage-delete-btn {
+    background-color: #dc2626;
+}
+
+/* ===== 메시지 ===== */
+.mypage-message {
+    margin-top: 1.5em;
+    font-weight: bold;
+    text-align: center;
+}
+
+.mypage-message.error {
+    color: #dc2626;
+}
+
+.mypage-message.success {
+    color: #16a34a;
+}

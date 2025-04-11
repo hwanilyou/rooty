@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>공지사항</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!--    <link rel="stylesheet" href="/css/flight_style.css">-->
+    <script src="/js/userinfo.js"></script>
+</head>
+<body>
+<div th:replace="fragments/header :: headerFragment"></div>
+
+<!-- 네비게이션 바 -->
+
+
+<!-- 공지사항 목록 -->
+<div class="container mt-5">
+    <h2>공지사항</h2>
+    <!-- ADMIN만 보이는 글쓰기 버튼 -->
+    <button id="writeBtn" class="btn btn-primary mb-3" onclick="location.href='/write'" style="display:none;">글쓰기</button>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성일</th>
+        </tr>
+        </thead>
+        <tbody id="postList"></tbody>
+    </table>
+    <nav>
+        <ul class="pagination justify-content-center" id="pagination"></ul>
+    </nav>
+</div>
+
+<script>
+    // 로그인 상태 확인
+    function checkLoginStatus() {
+        const token = localStorage.getItem('token');
+        const username = localStorage.getItem('username');
+        const role = localStorage.getItem('role');
+
+        if (token && username) {
+            document.getElementById('loginNav')?.classList.add('d-none');
+            document.getElementById('userNav')?.classList.remove('d-none');
+            document.getElementById('logoutNav')?.classList.remove('d-none');
+            document.getElementById('username').textContent = `${username}`;
+        } else {
+            document.getElementById('loginNav')?.classList.remove('d-none');
+            document.getElementById('userNav')?.classList.add('d-none');
+            document.getElementById('logoutNav')?.classList.add('d-none');
+        }
+    }
+
+    // 로그아웃 처리
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            localStorage.clear();
+            window.location.href = '/login';
+        });
+    }
+
+    // JWT 토큰에서 role 추출
+    function getUserRoleFromToken() {
+        const token = localStorage.getItem("token");
+        if (!token) return null;
+
+        try {
+            const payload = JSON.parse(atob(token.split('.')[1]));
+            return payload.role || null;
+        } catch (e) {
+            return null;
+        }
+    }
+
+    // 글 불러오기
+    function loadPosts(page) {
+        $.ajax({
+            url: '/api/notice/posts',
+            method: 'GET',
+            data: { page: page },
+            success: function(response) {
+                let html = '';
+                response.content.forEach(function(post) {
+                    html += `
+                        <tr>
+                            <td>${post.id}</td>
+                            <td><a href="/view/${post.id}">${post.title}</a></td>
+                            <td>${new Date(post.createdAt).toLocaleDateString()}</td>
+                        </tr>
+                    `;
+                });
+                $('#postList').html(html);
+                updatePagination(response.number, response.totalPages);
+            }
+        });
+    }
+
+    // 페이지네이션 생성
+    function updatePagination(currentPage, totalPages) {
+        let html = '';
+        for (let i = 0; i < totalPages; i++) {
+            html += `
+                <li class="page-item ${i === currentPage ? 'active' : ''}">
+                    <a class="page-link" href="#" onclick="loadPosts(${i})">${i + 1}</a>
+                </li>
+            `;
+        }
+        $('#pagination').html(html);
+    }
+
+    // 페이지 로딩 후 실행
+    $(document).ready(function () {
+        checkLoginStatus();
+        loadPosts(0);
+
+        const role = getUserRoleFromToken();
+        if (role === 'ADMIN') {
+            $('#writeBtn').show(); // 관리자만 글쓰기 버튼 보이게
+        }
+    });
+</script>
+</body>
+</html>

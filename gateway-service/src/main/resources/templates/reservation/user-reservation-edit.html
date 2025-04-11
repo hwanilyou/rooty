@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8"/>
+    <title>예약 관리 - 예약 상세 및 수정</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/flight_style.css">
+    <script src="/js/common.js"></script>
+    <script src="/js/userinfo.js"></script>
+</head>
+<body>
+
+<header>
+    <div layout:include="fragments/header :: headerFragment"></div>
+<!--    <nav class="navbar navbar-expand-lg navbar-light bg-light py-0">-->
+<!--        <div class="container">-->
+<!--            <img src="/images/Rooty_logo.png" alt="로고" width="100">-->
+<!--            <a class="navbar-brand" href="/">항공 예약 시스템</a>-->
+<!--            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">-->
+<!--                <span class="navbar-toggler-icon"></span>-->
+<!--            </button>-->
+<!--            <div class="collapse navbar-collapse" id="navbarNav">-->
+<!--                <ul class="navbar-nav me-auto">-->
+<!--                    <li class="nav-item"><a class="nav-link" href="/products"><i class="bi bi-box-seam"></i> 예약</a></li>-->
+<!--                    <li class="nav-item"><a class="nav-link" href="/order-complete"><i class="bi bi-check-circle"></i> 주문 완료 현황</a></li>-->
+<!--                    <li class="nav-item"><a class="nav-link" href="../notice/notice_list.html"><i class="bi bi-chat-square-text"></i> 공지사항</a></li>-->
+<!--                    <li class="nav-item"><a class="nav-link" href="../flight/admin-flight-list.html"><i class="bi bi-airplane"></i> 항공편 관리</a></li>-->
+<!--                </ul>-->
+<!--                <ul class="navbar-nav" id="authNav">-->
+<!--                    <li class="nav-item" id="loginNav"><a class="nav-link" href="/login"><i class="bi bi-box-arrow-in-right"></i> 로그인</a></li>-->
+<!--                    <li class="nav-item d-none" id="userNav"><span class="nav-link" id="username1"></span></li>-->
+<!--                    <li class="nav-item d-none" id="logoutNav"><a class="nav-link" href="#" id="logoutBtn"><i class="bi bi-box-arrow-right"></i> 로그아웃</a></li>-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </nav>-->
+</header>
+
+<main>
+    <div class="container">
+        <h2>예약 상세 및 수정</h2>
+        <form id="reservationEditForm" action="/api/reservations/update" method="post" class="form-horizontal">
+            <input type="hidden" name="id" value="{{reservation.id}}">
+
+            <div class="form-group">
+                <label for="flightNumber">항공편 번호</label>
+                <input type="text" id="flightNumber" name="flightNumber" value="{{reservation.flightNumber}}" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="departure">출발지</label>
+                <input type="text" id="departure" name="departure" value="{{reservation.departure}}" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="destination">도착지</label>
+                <input type="text" id="destination" name="destination" value="{{reservation.destination}}" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="seatGrade">좌석 등급</label>
+                <select id="seatGrade" name="seatGrade">
+                    <option value="ECONOMY">이코노미</option>
+                    <option value="BUSINESS">비즈니스</option>
+                    <option value="FIRST">퍼스트</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="seatNumber">좌석 번호</label>
+                <select id="seatSelect" name="seatNumber">
+                    <!-- 자바스크립트로 동적으로 채움 -->
+                </select>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn">수정 완료</button>
+                <a href="/reservation/user-reservation-list" class="btn secondary">목록으로 돌아가기</a>
+            </div>
+        </form>
+    </div>
+</main>
+
+<footer>
+    <div class="container">
+        <p>© 2025 항공 예약 서비스. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const seatSelect = document.getElementById("seatSelect");
+        const seatOptions = ["1A", "1B", "2A", "2B", "3A"];
+
+        seatSelect.innerHTML = '';
+        seatOptions.forEach(seat => {
+            const option = document.createElement("option");
+            option.value = seat;
+            option.textContent = seat;
+            seatSelect.appendChild(option);
+        });
+
+        // ✅ 실제 API 연동 시 사용할 코드 (예약 백엔드 개발 후 주석 해제)
+        /*
+        const token = localStorage.getItem("token");
+        const flightId = "{{reservation.flightId}}";
+
+        fetch("/api/flights/" + flightId + "/seats", {
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer " + token
+            }
+        })
+        .then(res => res.json())
+        .then(seats => {
+            seatSelect.innerHTML = '';
+            seats.forEach(seat => {
+                if (!seat.reserved) {
+                    const option = document.createElement("option");
+                    option.value = seat.number;
+                    option.textContent = seat.number;
+                    seatSelect.appendChild(option);
+                }
+            });
+        })
+        .catch(err => {
+            alert("좌석 정보를 불러오는 데 실패했습니다. 다시 로그인해주세요.");
+            console.error(err);
+            window.location.href = "/login";
+        });
+        */
+    });
+</script>
+
+
+</body>
+</html>

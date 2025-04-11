@@ -1,4 +1,4 @@
-package com.example.board;
+package com.example.importboardservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이페이지</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/css/mypage.css">
+
+    <script src="/js/userinfo.js"></script>
+</head>
+<body>
+
+<!-- ===== 헤더  ===== -->
+<div layout:include="fragments/header :: headerFragment"></div>
+
+<!-- ===== 마이페이지 콘텐츠 ===== -->
+<div class="mypage-container">
+    <h1 class="mypage-title">마이페이지</h1>
+    <form id="mypage-form">
+        <label for="username" class="mypage-label">아이디 (수정 불가)</label>
+        <input type="text" id="username" class="mypage-input" disabled />
+
+        <label for="email" class="mypage-label">이메일</label>
+        <input type="email" id="email" class="mypage-input" required />
+
+        <label for="password" class="mypage-label">비밀번호 변경 (선택)</label>
+        <input type="password" id="password" class="mypage-input" placeholder="새 비밀번호 입력" />
+
+        <button type="submit" class="mypage-button">정보 수정</button>
+    </form>
+    <button type="button" id="deleteAccountBtn" class="mypage-button mypage-delete-btn">
+        계정 삭제
+    </button>
+
+    <div class="mypage-message" id="message"></div>
+</div>
+
+<!-- ===== 스크립트 ===== -->
+<script>
+    // 관리자이면 관리자 페이지로 이동
+    const role = localStorage.getItem("role");
+    if (role === "ADMIN") {
+        window.location.href = "/user/members"; // ✅ 관리자 회원 관리 페이지 경로 수정됨
+    }
+
+    const token = localStorage.getItem("token");
+    const usernameInput = document.getElementById("username");
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+    const messageDiv = document.getElementById("message");
+    const form = document.getElementById("mypage-form");
+
+    if (!token) {
+        messageDiv.textContent = "로그인이 필요합니다.";
+        messageDiv.classList.add("error");
+        form.style.display = "none";
+    } else {
+        // 사용자 정보 조회
+        axios.get("/api/mypage", {
+            headers: {
+                Authorization: "Bearer " + token
+            }
+        })
+            .then(response => {
+                usernameInput.value = response.data.username;
+                emailInput.value = response.data.email;
+            })
+            .catch(error => {
+                console.error("사용자 정보 조회 실패", error);
+                messageDiv.textContent = "사용자 정보를 불러오지 못했습니다.";
+                messageDiv.classList.add("error");
+            });
+
+        // 폼 제출 시 수정 요청
+        form.addEventListener("submit", function(e) {
+            e.preventDefault();
+            const updateData = {
+                email: emailInput.value,
+                password: passwordInput.value
+            };
+
+            axios.put("/api/mypage", updateData, {
+                headers: {
+                    Authorization: "Bearer " + token
+                }
+            })
+                .then(response => {
+                    messageDiv.textContent = "정보가 성공적으로 수정되었습니다!";
+                    messageDiv.classList.remove("error");
+                    passwordInput.value = "";
+                })
+                .catch(error => {
+                    console.error("정보 수정 실패", error);
+                    messageDiv.textContent = "정보 수정에 실패했습니다.";
+                    messageDiv.classList.add("error");
+                });
+        });
+    }
+
+    const deleteBtn = document.getElementById("deleteAccountBtn");
+    deleteBtn.addEventListener("click", function() {
+        const confirmDelete = confirm("정말로 계정을 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.");
+        if (!confirmDelete) return;
+
+        axios.delete("/api/mypage", {
+            headers: {
+                Authorization: "Bearer " + token
+            }
+        })
+            .then(response => {
+                alert("계정이 삭제되었습니다.");
+                localStorage.removeItem("token");
+                window.location.href = "/";
+            })
+            .catch(error => {
+                console.error("계정 삭제 실패", error);
+                messageDiv.textContent = "계정 삭제에 실패했습니다.";
+                messageDiv.classList.add("error");
+            });
+    });
+
+    console.log('📦 localStorage 상태 확인');
+    console.log('token:', localStorage.getItem('token'));
+    console.log('role:', localStorage.getItem('role'));
+    console.log('username:', localStorage.getItem('username'));
+</script>
+</body>
+</html>

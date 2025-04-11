@@ -10,12 +10,11 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/admin-service" />
             <option value="$PROJECT_DIR$/booking-service" />
             <option value="$PROJECT_DIR$/eureka-server" />
             <option value="$PROJECT_DIR$/flight-service" />
             <option value="$PROJECT_DIR$/gateway-service" />
-            <option value="$PROJECT_DIR$/importBoard-service" />
+            <option value="$PROJECT_DIR$/notice-service" />
             <option value="$PROJECT_DIR$/notification-service" />
             <option value="$PROJECT_DIR$/seat-service" />
             <option value="$PROJECT_DIR$/user-service" />

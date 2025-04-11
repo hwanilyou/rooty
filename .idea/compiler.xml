@@ -7,13 +7,12 @@
         <processorPath useClasspath="false">
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.30/f195ee86e6c896ea47a1d39defbe20eb59cd149d/lombok-1.18.30.jar" />
         </processorPath>
+        <module name="rooty.notice-service.main" />
         <module name="rooty.eureka-server.main" />
         <module name="rooty.user-service.main" />
-        <module name="rooty.importBoard-service.main" />
         <module name="rooty.flight-service.main" />
         <module name="rooty.booking-service.main" />
         <module name="rooty.gateway-service.main" />
-        <module name="rooty.admin-service.main" />
         <module name="rooty.seat-service.main" />
         <module name="rooty.notification-service.main" />
       </profile>
