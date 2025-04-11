@@ -1,128 +1,104 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <title>회원 가입</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
-
     <link rel="stylesheet" href="/css/login.css">
 </head>
 
-
 <body>
+<!-- 헤더 부분은 th:replace로 안정적으로 삽입 -->
+<div th:replace="fragments/header :: headerFragment"></div>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light py-0">
+<main>
     <div class="container">
-        <img src="/images/Rooty_logo.png" alt="로고" width="100">
-        <a class="navbar-brand" href="/">항공 예약 시스템</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto">
-                <li class="nav-item"><a class="nav-link" href="/products"><i class="bi bi-box-seam"></i> 예약</a></li>
-                <li class="nav-item"><a class="nav-link" href="/order-complete"><i class="bi bi-check-circle"></i> 주문 완료 현황</a></li>
-                <li class="nav-item"><a class="nav-link" href="../notice/notice_list.html"><i class="bi bi-chat-square-text"></i> 공지사항</a></li>
-                <li class="nav-item"><a class="nav-link" href="../flight/admin-flight-list.html"><i class="bi bi-airplane"></i> 항공편 관리</a></li>
-            </ul>
-            <ul class="navbar-nav" id="authNav">
-                <li class="nav-item" id="loginNav"><a class="nav-link" href="/login"><i class="bi bi-box-arrow-in-right"></i> 로그인</a></li>
-                <li class="nav-item d-none" id="userNav"><span class="nav-link" id="username1"></span></li>
-                <li class="nav-item d-none" id="logoutNav"><a class="nav-link" href="#" id="logoutBtn"><i class="bi bi-box-arrow-right"></i> 로그아웃</a></li>
-            </ul>
+        <div class="register-container mt-5">
+            <h2 class="register-title text-center mb-4">회원 가입</h2>
+            <form id="registerForm">
+                <div class="mb-3">
+                    <label for="username" class="form-label">아이디</label>
+                    <input type="text" class="form-control" id="username" name="username" required>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">비밀번호</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <div class="mb-3">
+                    <label for="name" class="form-label">사용자명</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">이메일</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-register">회원 가입</button>
+                </div>
+                <div class="login-link text-center mt-3">
+                    <a href="/login">이미 계정이 있으신가요? 로그인</a>
+                </div>
+            </form>
         </div>
     </div>
-</nav>
+</main>
 
-<div class="container">
-    <div class="register-container mt-5">
-        <h2 class="register-title text-center mb-4">회원 가입</h2>
-        <form id="registerForm">
-            <div class="mb-3">
-                <label for="username" class="form-label">아이디</label>
-                <input type="text" class="form-control" id="username" name="username" required>
-            </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">비밀번호</label>
-                <input type="password" class="form-control" id="password" name="password" required>
-            </div>
-            <div class="mb-3">
-                <label for="name" class="form-label">사용자명</label>
-                <input type="text" class="form-control" id="name" name="name" required>
-            </div>
-            <div class="mb-3">
-                <label for="email" class="form-label">이메일</label>
-                <input type="email" class="form-control" id="email" name="email" required>
-            </div>
-            <div class="d-grid">
-                <button type="submit" class="btn btn-primary btn-register">회원 가입</button>
-            </div>
-            <div class="login-link text-center mt-3">
-                <a href="/login">이미 계정이 있으신가요? 로그인</a>
-            </div>
-        </form>
-    </div>
-</div>
-
-<!-- Bootstrap JS -->
+<!-- JS는 가장 아래에 위치 -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
 <script>
     document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById('registerForm');
+        if (form) {
+            form.addEventListener('submit', async function (e) {
+                e.preventDefault();
 
+                // ✅ form 내부 input만 선택하도록 수정
+                const usernameInput = form.querySelector('input[name="username"]');
+                const passwordInput = form.querySelector('input[name="password"]');
+                const nameInput = form.querySelector('input[name="name"]');
+                const emailInput = form.querySelector('input[name="email"]');
 
-                // 헤더 다 불러오고 나서 폼 이벤트 등록
-                const form = document.getElementById('registerForm');
-                if (form) {
-                    form.addEventListener('submit', async function (e) {
-                        e.preventDefault();
+                console.log("username:", `"${usernameInput?.value}"`);
+                console.log("password:", `"${passwordInput?.value}"`);
+                console.log("name:", `"${nameInput?.value}"`);
+                console.log("email:", `"${emailInput?.value}"`);
 
-                        const usernameInput = document.getElementById('username');
-                        const passwordInput = document.getElementById('password');
-                        const nameInput = document.getElementById('name');
-                        const emailInput = document.getElementById('email');
+                const username = usernameInput?.value?.trim();
+                const password = passwordInput?.value?.trim();
+                const name = nameInput?.value?.trim();
+                const email = emailInput?.value?.trim();
 
-                        if (!usernameInput || !passwordInput || !nameInput || !emailInput) {
-                            alert("입력 필드가 올바르게 로딩되지 않았습니다.");
-                            return;
-                        }
+                if (!username || !password || !name || !email) {
+                    alert("모든 항목을 입력해 주세요.");
+                    return;
+                }
 
-                        const username = usernameInput.value.trim();
-                        const password = passwordInput.value.trim();
-                        const name = nameInput.value.trim();
-                        const email = emailInput.value.trim();
-
-                        if (!username || !password || !name || !email) {
-                            alert("모든 항목을 입력해 주세요.");
-                            return;
-                        }
-
-                        console.log("📤 보내는 값:", { username, password, name, email });
-
-                        try {
-                            const response = await fetch('/api/auth/register', {
-                                method: 'POST',
-                                headers: { 'Content-Type': 'application/json' },
-                                body: JSON.stringify({ username, password, name, email })
-                            });
-
-                            if (response.ok) {
-                                alert('회원 가입이 완료되었습니다.');
-                                window.location.href = '/login';
-                            } else {
-                                const error = await response.text();
-                                alert('회원 가입에 실패했습니다: ' + error);
-                            }
-                        } catch (error) {
-                            console.error('❌ 네트워크 오류:', error);
-                            alert('회원 가입 중 오류가 발생했습니다.');
-                        }
+                try {
+                    const response = await fetch('/api/auth/register', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ username, password, name, email })
                     });
+
+                    if (response.ok) {
+                        alert('회원 가입이 완료되었습니다.');
+                        window.location.href = '/login';
+                    } else {
+                        const error = await response.text();
+                        alert('회원 가입에 실패했습니다: ' + error);
+                    }
+                } catch (error) {
+                    console.error('❌ 네트워크 오류:', error);
+                    alert('회원 가입 중 오류가 발생했습니다.');
                 }
             });
-</script>
+        }
 
+    });
+</script>
 
 </body>
 </html>
