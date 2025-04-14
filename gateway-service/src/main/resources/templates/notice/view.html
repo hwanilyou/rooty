@@ -25,7 +25,7 @@
         <div class="mb-3" id="adminButtons" style="display: none;">
             <button class="btn btn-danger" onclick="deletePost()">삭제</button>
         </div>
-        <button class="btn btn-secondary" onclick="location.href='/notice/notice_list.html'">목록</button>
+        <button class="btn btn-secondary" onclick="location.href='/notice'">목록</button>
     </div>
 </div>
 
@@ -86,7 +86,7 @@
                 },
                 success: function () {
                     alert('삭제되었습니다.');
-                    location.href = '/notice/notice_list.html';
+                    location.href = '/notice';
                 },
                 error: function () {
                     alert('삭제 실패');

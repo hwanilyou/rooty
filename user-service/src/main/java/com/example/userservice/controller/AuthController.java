@@ -31,8 +31,12 @@ public class AuthController {
                     .body("아이디 또는 비밀번호가 올바르지 않습니다.");
         }
 
-        String token = jwtUtil.createToken(user.getUsername(), user.getRole());
-        return ResponseEntity.ok(Map.of("token", token));
+        String token = jwtUtil.createToken(user.getId(), user.getUsername(), user.getRole());
+
+        return ResponseEntity.ok(Map.of("token", token,
+                "userId", user.getId(),
+                "username", user.getUsername()
+        ));
     }
 
     @PostMapping("/register")

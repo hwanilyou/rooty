@@ -2,6 +2,7 @@ package com.example.userservice.jwt;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
@@ -11,16 +12,19 @@ import java.util.Date;
 @Component
 public class JwtUtil {
 
-    private final String secret = "my-secret-key-for-jwt-token-generation-rooty";
+    @Value("${jwt.secret}")
+    private String secret;
+
     private final long expirationMs = 1000 * 60 * 60; // 1시간
 
     private Key getSigningKey() {
         return Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
     }
 
-    public String createToken(String username, String role) {
+    public String createToken(Long id,String username, String role) {
         return Jwts.builder()
                 .setSubject(username)
+                .claim("id", id)  // ✅ userId 포함!
                 .claim("role", role)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + expirationMs))

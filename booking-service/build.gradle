@@ -20,11 +20,9 @@ dependencies {
     //Validation 유효성 검사
     implementation 'org.springframework.boot:spring-boot-starter-validation'
 
-    // Spring Security 추가 -> 나중에 수정 버림
-//    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-amqp' // RabbitMQ
 
-    // 비밀번호 암호화 -> 나중에 수정 버림
-//    implementation 'org.springframework.security:spring-security-crypto'
-//
-//    implementation 'org.modelmapper:modelmapper:3.1.0' // 매퍼
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5' // or jjwt-gson
 } 

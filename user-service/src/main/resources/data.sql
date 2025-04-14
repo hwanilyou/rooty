@@ -1,4 +1,2 @@
-INSERT INTO users (username, password, role, name, email) VALUES
-('admin', '1234', 'ADMIN', '관리자', 'admin@rooty.com'),
--- ('user1', '1234', 'USER', '사용자1', 'user1@rooty.com'),
--- ('user12', '1234', 'USER', '사용자12', 'user12@rooty.com');
+INSERT INTO users (username, password, role, name, email)
+VALUES ('root', '$2a$10$W6L3htNQPwZzLzUeGgGmjOEW9Th8CCxUzEWrcJwT9F1Pe0Aq9zV2S', 'ADMIN', '관리자', 'admin@example.com');

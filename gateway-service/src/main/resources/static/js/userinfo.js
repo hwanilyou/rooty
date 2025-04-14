@@ -15,8 +15,13 @@ window.addEventListener("DOMContentLoaded", () => {
             const payload = JSON.parse(atob(token.split('.')[1]));
             const username = payload.sub;
             const role = (payload.role || "").toUpperCase(); // ✅ 안전하게 대문자로 변환
+            const userId = payload.id; // ✅ 추가된 userId
 
             console.log("🔐 로그인 사용자:", username, "| 역할:", role); // ✅ 디버깅용
+            console.log("✅ 사용자 ID:", userId);
+            
+            sessionStorage.setItem('userId', userId);
+            sessionStorage.setItem('username', username); // 유저 이름도 저장
 
             // 로그인 상태 UI 처리
             loginNav?.classList.add("d-none");

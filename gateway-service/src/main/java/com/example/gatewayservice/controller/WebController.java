@@ -73,6 +73,7 @@ public class WebController {
         return "reservation/user-reservation-list";
     }
 
+    //수정아님 상세보기로 바꿈
     @GetMapping("/reservation/user-reservation-edit")
     public String userReservationEdit(@RequestParam("id") Long reservationId, Model model) {
         model.addAttribute("reservationId", reservationId);
@@ -80,6 +81,11 @@ public class WebController {
         return "reservation/user-reservation-edit";
     }
 
+
+//    @GetMapping("/reservation/seat-edit")
+//    public String seatEditPage() {
+//        return "reservation/seat-edit"; // templates/reservation/seat-edit.html 을 렌더링
+//    }
 
 
 
