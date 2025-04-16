@@ -1,5 +1,6 @@
 package com.example.bookingservice.service;
 
+import com.example.bookingservice.config.RabbitConfig;
 import com.example.bookingservice.dto.BookingRequest;
 import com.example.bookingservice.dto.FlightResponse;
 import com.example.bookingservice.dto.SeatUpdateRequest;
@@ -7,6 +8,7 @@ import com.example.bookingservice.entity.BookingEntity;
 import com.example.bookingservice.repository.BookingRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -17,12 +19,21 @@ import org.springframework.web.client.RestTemplate;
 public class BookingService {
 
     private final BookingRepository bookingRepository;
+    private final RabbitTemplate rabbitTemplate;
 
     public void bookSeats(BookingRequest bookingRequest) {
+        log.info("RabbitMQ로 예약 정보 전송: {}", bookingRequest);
+        rabbitTemplate.convertAndSend(
+            RabbitConfig.EXCHANGE_NAME,
+            RabbitConfig.ROUTING_KEY,
+            bookingRequest
+        );
         bookingRequest.getSeats().forEach(seat -> {
             System.out.println("좌석: " + seat.getSeatName() + ", 등급: " + seat.getSeatClass() + ", 가격: " + seat.getPrice());
             // 실제로는 repository.save() 로 저장
         });
+
+
     }
 
     public void saveBooking(BookingRequest bookingRequest) {

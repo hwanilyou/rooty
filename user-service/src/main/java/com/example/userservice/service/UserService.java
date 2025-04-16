@@ -1,21 +1,27 @@
 package com.example.userservice.service;
 
+
 import com.example.userservice.domain.User;
+import com.example.userservice.domain.UserBookingEntity;
 import com.example.userservice.dto.RegisterRequest;
+import com.example.userservice.dto.UserRequest;
 import com.example.userservice.repository.UserRepository;
+import com.example.userservice.repository.userBookingRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-
+    private final userBookingRepository userBookingRepository;
     /**
      * 로그인 유효성 검사 (암호화된 비밀번호 비교 포함)
      */
@@ -59,4 +65,30 @@ public class UserService {
                 .build();
         userRepository.save(user);
     }
+
+    public void saveBooking(UserRequest userRequest) {
+        log.info("메시지 큐에서 받은 예약 저장: 유저={}, 비행기={}", userRequest.getUserId(), userRequest.getFlightId());
+
+        userRequest.getSeats().forEach(seat -> {
+            log.info("좌석: {}, 등급: {}, 가격: {}", seat.getSeatName(), seat.getSeatClass(), seat.getPrice());
+            // 실제로는 repository.save() 로 저장
+            UserBookingEntity booking = new UserBookingEntity();
+            booking.setUserId(userRequest.getUserId());
+            booking.setFlightId(userRequest.getFlightId());
+            booking.setSeatName(seat.getSeatName());
+            booking.setSeatClass(seat.getSeatClass());
+            booking.setPrice(seat.getPrice());
+
+
+            log.info("메시지 큐에서 받은 예약 저장: userId={}, flightId={}, seats={}",
+                userRequest.getUserId(),
+                userRequest.getFlightId(),
+                userRequest.getSeats());
+
+            userBookingRepository.save(booking);
+        });
+    }
+
+
+
 }
